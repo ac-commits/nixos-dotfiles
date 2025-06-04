@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+
 # enable networking
 networking.networkmanager.enable = true;
 hardware.bluetooth.enable = true;
@@ -23,3 +24,11 @@ hardware.bluetooth.enable = true;
   };
 
 }
+  # Virtualisation
+  virtualisation = {
+    docker = {
+     enable = true;
+    };
+  };
+  virtualisation.vmware.host.enable = true;
+  hardware.nvidia-container-toolkit.enable = true;
