@@ -1,0 +1,170 @@
+#+title: Readme
+
+* Getting Started
+While switching to =nixos= this repository helps providing a clean and modular =NixOS= setup, keeping the following in mind:
+
+- ~configuration.nix~ for system-level configuration;
+- ~home.nix~ using ~home-manager~ for user configs.
+
+
+* 🚀 Quickstart
+
+1. Clone this repo inside your =NixOS= install:
+
+#+begin_src shell
+nix-shell -p git
+git clone https://github.com/ac-commits/nixos-dotfiles .
+#+end_src
+
+2. Edit =configuration.nix=:
+   [[./default.configuration.nix][default configuration file]]
+
+#+begin_src bash
+sudo cp nixos-dotfiles/nix/configuration.nix /etc/nixos/configuration.nix
+#+end_src
+
+3. Reboot, remove install media,  and :boom: you're in:
+
+#+begin_src shell
+sudo nixos-rebuild switch -v
+#+end_src
+
+Reboot, remove install media, and boomy.stain
+
+---
+
+* 🏠 Home Manager
+
+Already baked in via =configuration.nix=:
+
+#+begin_src nix
+imports = [
+  ./hardware-configuration.nix
+  <home-manager/nixos>
+];
+
+home-manager.users.yourusername = import ./home.nix;
+#+end_src
+
+"Home is where your =~/.config= is." /See what I did there?/
+[[./default.home.nix][default home file]]
+---
+
+* 🔁 Updating
+
+For full system + user config:
+
+#+begin_src shell
+sudo nixos-rebuild switch
+#+end_src
+
+Just tweaking user-level settings?
+
+#+begin_src shell
+home-manager switch
+#+end_src
+
+Always test first:
+
+#+begin_src shell
+nixos-rebuild build or dry-run
+#+end_src
+
+---
+
+* 🧹 Keep it Clean
+
+- One system to rule them all
+- One config to version them
+- One command to switch them all
+- And in `/etc/nixos/` bind them
+
+---
+
+* 📚 Learn More
+
+- [[https://nixos.org/manual/nixos/stable/][NixOS Manual]]
+- [[https://github.com/nix-community/home-manager][Home Manager Docs]]
+- [[https://nixos.wiki][NixOS Wiki]]
+
+---
+
+* 🪪 License
+
+MIT, but feel free to copy the vibe too.
+
+
+** 1. Keep System and User Configs Separate
+Use ~configuration.nix~ for system-wide settings (e.g., services, networking, boot) and ~home.nix~ for user-level packages, dotfiles, and settings.
+
+** 2. Enable and Use Home Manager
+#+begin_src nix
+# Inside configuration.nix
+{ config, pkgs, ... }:
+
+{
+  imports = [
+    ./home.nix
+    <home-manager/nixos>
+  ];
+
+  home-manager.useUserPackages = true;
+  home-manager.users.yourusername = import ./home.nix;
+}
+#+end_src
+
+** 3. Use Version Control
+Track your configurations using =git=. This allows rollbacks, diffs, and easy reuse on other machines.
+
+** 4. Use Modules and Abstractions
+Split complex configurations into reusable modules as your setup grows.
+
+** 5. Test with =nixos-rebuild build=
+Avoid applying directly with =nixos-rebuild switch=. Use =build= or =dry-run= first:
+#+begin_src sh
+sudo nixos-rebuild build
+# or
+sudo nixos-rebuild dry-run
+#+end_src
+
+** 6. Pin Your Nixpkgs (Optional but Recommended)
+This ensures reproducibility over time. Use flakes or set a specific channel/revision manually.
+
+* Installation
+
+1. Clone this repository:
+#+begin_src sh
+git clone https://github.com/yourusername/nixos-config.git
+cd nixos-config
+#+end_src
+
+2. Link your configs:
+#+begin_src sh
+sudo cp configuration.nix /etc/nixos/configuration.nix
+# If using flakes, set up flake.nix and link to /etc/nixos/flake.nix
+#+end_src
+
+3. Rebuild your system:
+#+begin_src sh
+sudo nixos-rebuild switch
+#+end_src
+
+4. For home-manager (if installed as standalone):
+#+begin_src sh
+home-manager switch
+#+end_src
+
+* Optional: Flakes Setup
+
+If you're using flakes, ensure that flakes are enabled and you have a ~flake.nix~ and ~flake.lock~. Update the README to reflect flake usage accordingly.
+
+* References
+- [[https://nixos.org/manual/nixos/stable/][NixOS Manual]]
+- [[https://github.com/nix-community/home-manager][Home Manager]]
+- [[https://nixos.wiki/][NixOS Wiki]]
+
+* License
+MIT or your preferred license.
+
+* Contributions
+Feel free to fork and submit pull requests. Suggestions and improvements are welcome!
