@@ -23,9 +23,9 @@
 
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
+    # direnv
+    direnv
+    nix-direnv
     kdePackages.okular
     alacritty
     i3
@@ -37,6 +37,7 @@
     coreutils
     clang
     nerd-fonts.symbols-only
+    nerd-fonts.jetbrains-mono
     git
     ripgrep
     fd
@@ -45,8 +46,6 @@
     hunspellDicts.nl_NL
     hunspellDicts.en_US
     flameshot
-    direnv
-    nix-direnv
     pulseaudio
     pavucontrol
     emacs-all-the-icons-fonts

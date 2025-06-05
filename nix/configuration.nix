@@ -9,8 +9,11 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./shared.nix
+      ./virt.nix
       <home-manager/nixos>
     ];
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -94,15 +97,10 @@
     extraGroups = [ "networkmanager" "wheel" "audio" "docker" ];
     packages = with pkgs; [
     #  thunderbird
-    vmware-workstation
+    # vmware-workstation is not yet compatible with latest kernel
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -116,10 +114,10 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
