@@ -44,9 +44,9 @@ imports = [
 home-manager.users.yourusername = import ./home.nix;
 #+end_src
 
-"Home is where your =~/.config= is." /See what I did there?/
+"Home is where your =~/.config= is."
 [[./default.home.nix][default home file]]
----
+
 
 
 * Virtualisation
@@ -57,7 +57,7 @@ getting more complex all the time
 *AKA:* /Data and Goliath/ *BRUCE SCHEiER*
 
 Due to the incompatibilty of =vmware workstation pro= with =kernel 6.15 >== there are 2 options:
-1. switching to =virt-manager= # which I did?
+1. switching to =virt-manager= # which I did /See what I did there? [[./nix/virt.nix][virt.nix]]
 2. Use pinned =pkgs.packages= for =vmware-workstation= to a specific lower kernel.
 
 
