@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./shared.nix
+      ./networking.nix
       ./virt.nix
       <home-manager/nixos>
     ];
@@ -97,10 +97,9 @@
     extraGroups = [ "networkmanager" "wheel" "audio" "docker" ];
     packages = with pkgs; [
     #  thunderbird
-    # vmware-workstation is not yet compatible with latest kernel
+    # vmware-workstation
     ];
   };
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -114,15 +113,15 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
+  #programs.gnupg.agent = {
+  #  enable = true;
+  #  enableSSHSupport = true;
+  # };
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
