@@ -58,7 +58,11 @@
     windowManager.i3.enable = true;
   #  videoDrivers = [ "nvidia" ];
   };
-  # Enable the GNOME Desktop Environment.
+  # i3lock doesn't recognize my password
+  # https://wiki.nixos.org/wiki/I3
+  security.pam.services.i3lock.enable = true;
+
+ # Enable the GNOME Desktop Environment.
  # services.xserver.displayManager.gdm.enable = true;
  # services.xserver.desktopManager.gnome.enable = true;
 
